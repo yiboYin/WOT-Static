@@ -6,12 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint"
-    }
+    "lint": "next lint",
+    "prepare": "husky install"
   },
   "dependencies": {
     "next": "12.1.0",
