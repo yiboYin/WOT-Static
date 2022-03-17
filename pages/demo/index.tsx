@@ -1,9 +1,10 @@
 import type { NextPage } from 'next'
+import { Button } from 'antd';
 
 const Demo: NextPage = () => {
   return (
     <div>
-      demo container
+      <Button type="primary">Button</Button>
     </div>
   )
 }
