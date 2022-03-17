@@ -1,0 +1,6 @@
+
+
+export const actionTypes = {
+  LOAD_SECRET: 'LOAD_SECRET',
+  LOAD_SECRET_SUCCESS: 'LOAD_SECRET_SUCCESS',
+}
