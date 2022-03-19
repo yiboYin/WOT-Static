@@ -3,6 +3,7 @@ process.env.PORT = parseInt(process.env.PORT, 10) || 8000
 require('ignore-styles')
 require('express-async-errors')
 const cookieParser = require('cookie-parser')
+const session = require("express-session")
 // lib modules
 const logger = require('./lib/logger')
 // main modules
@@ -23,6 +24,15 @@ async function startServer(server) {
         server.set('trust proxy', true)
 
         server.use(cookieParser())
+        server.use(
+            session({
+                key: 'SESSION_ID',
+                secret: "demoSession",
+                resave: false,
+                saveUninitialized: false,
+                cookie: { maxAge: 1000 * 60 * 60 * 8, signed: true },
+            })
+        )
         server.use(appRouter())
         server.use((req, res, next) => {
             const isHealthcheck = req.url.indexOf('/health') > -1
