@@ -1,0 +1,24 @@
+.wrapper {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url('../assets/img/homepage-bg.jpg');
+    background-size: 100% 100%;
+}
+
+.inputContainer {
+    width: 60vw;
+    display: flex;
+}
+
+.serverSelector div {
+    background-color: #FF850a !important;
+    color: white;
+}
+
+.searchBtn {
+    background-color: #FF850a !important;
+    color: white;
+}
