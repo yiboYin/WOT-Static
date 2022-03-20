@@ -1,0 +1,11 @@
+node_modules/
+coverage/
+dist/
+build/
+out/
+.build/
+docs/
+package.json
+ssr_build/
+.next/
+assets/
