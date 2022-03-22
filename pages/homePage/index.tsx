@@ -3,7 +3,7 @@ import type { NextPage } from 'next'
 import { Button, Select, Input } from 'antd'
 
 import styled from 'styled-components'
-// import bg from '../../assets/img/homepage-bg.jpg'
+import bg from '../../assets/img/homepage-bg.jpg'
 
 const HomePage: NextPage = () => {
   const INIT_REGION = 'RU'
@@ -19,7 +19,7 @@ const HomePage: NextPage = () => {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-image: ${require('../../assets/img/homepage-bg.jpg')};
+    background-image: ${`url(${bg.src})`};
     background-size: 100%;
   `
 
