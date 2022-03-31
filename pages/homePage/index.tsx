@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import type { NextPage } from 'next'
-import { Button, Select, Input } from 'antd'
+import { Button, Select, Input, message } from 'antd'
 import styled from 'styled-components'
 import useRSAEncrypt from '../../lib/hooks/useRSAEncrypt'
 import api from '../../lib/apiClient'
@@ -36,6 +36,7 @@ const HomePage: NextPage = () => {
 
   const [region, setRegion] = useState<string>(INIT_REGION)
   const [accountName, setAccountName] = useState<string>('')
+  const [isLoading, setIsLoading] = useState<boolean>(false)
   const { rsaEncryptData } = useRSAEncrypt()
 
   const inputChangeHandler = (e: React.SyntheticEvent) => {
@@ -44,13 +45,28 @@ const HomePage: NextPage = () => {
   }
 
   const submitHandler = async () => {
-    try {
-      await api.post('/signin', {
-        region,
-        accountName: rsaEncryptData(accountName)
-      })
-    } catch (error) {
-      //do some logic
+    if (accountName) {
+      setIsLoading(true)
+      try {
+        const res = await api.post('/signin', {
+          region,
+          accountName: rsaEncryptData(accountName)
+        })
+        const {
+          data: { Code, Msg }
+        } = res
+        if (Code === 'success') {
+          message.success({ content: Msg })
+          window.location.href = window.location.href.replace('/homePage', '/player')
+        } else {
+          message.warning({ content: Msg })
+        }
+      } catch (error) {
+        //do some logic
+        setIsLoading(false)
+      }
+    } else {
+      message.warning({ content: '请输入账号' })
     }
   }
 
@@ -67,8 +83,8 @@ const HomePage: NextPage = () => {
             )
           })}
         </Select>
-        <Input size="large" value={accountName} onChange={inputChangeHandler} />
-        <Button size="large" type="primary" className="searchBtn" onClick={submitHandler}>
+        <Input size="large" value={accountName} onChange={inputChangeHandler} onPressEnter={submitHandler} />
+        <Button size="large" type="primary" className="searchBtn" onClick={submitHandler} loading={isLoading}>
           Submit
         </Button>
       </InputContainer>
