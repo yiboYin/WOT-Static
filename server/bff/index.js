@@ -1,6 +1,6 @@
 const express = require('express')
 const { decryptRSAFields } = require('../middlewares/asymmetricDecryptFields')
-const { getAccountId } = require('../middlewares/requestToWotStatistics')
+const { getAccountIdController } = require('../controllers/getAccountIdController')
 
 const router = express.Router()
 const publicRouter = express.Router()
@@ -10,7 +10,7 @@ const privateRouter = express.Router()
 router.use(publicRouter)
 router.use(privateRouter)
 
-publicRouter.post('/signin', decryptRSAFields(['accountName']), getAccountId())
+publicRouter.post('/signin', decryptRSAFields(['accountName']), getAccountIdController())
 
 // Handle no route match under /bff
 router.use((req, res) => {

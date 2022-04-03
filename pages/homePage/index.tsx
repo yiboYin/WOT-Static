@@ -61,6 +61,7 @@ const HomePage: NextPage = () => {
         } else {
           message.warning({ content: Msg })
         }
+        setIsLoading(false)
       } catch (error) {
         //do some logic
         setIsLoading(false)
