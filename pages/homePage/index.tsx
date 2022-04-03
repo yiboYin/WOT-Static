@@ -13,7 +13,7 @@ const Wrapper = styled.div`
   justify-content: center;
   align-items: center;
   background-image: ${`url(${bg.src})`};
-  background-size: 100%;
+  background-size: 100% 100%;
 `
 
 const InputContainer = styled.div`
