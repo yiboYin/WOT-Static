@@ -8,7 +8,10 @@ const privateRouter = express.Router()
 router.use(publicRouter)
 router.use(privateRouter)
 
+require('./warGame')(publicRouter, privateRouter)
+
 publicRouter.post('/signin', decryptRSAFields(['accountName']), async (req, res) => {
+  // TODO
   return res.status(200).json({ data: 'success' })
 })
 

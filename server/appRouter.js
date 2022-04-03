@@ -7,11 +7,11 @@ const appRouter = express.Router()
 appRouter.use(express.urlencoded({ limit: '30mb', extended: true }))
 appRouter.use(express.json({ limit: '30mb' }))
 
-// appRouter.use('/', requestLog)
+// appRouter.use('/', requestLog) //TODO
 
 appRouter.use('/bff', bffRouter)
 
-// appRouter.use('/m', mobileRouter)
+// appRouter.use('/m', mobileRouter) //TODO
 
 appRouter.use(pageRouter)
 
