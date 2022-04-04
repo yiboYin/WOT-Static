@@ -16,7 +16,6 @@ const bindMiddleware = (middleware: any) => {
 export const makeStore = () => {
   const sagaMiddleware = createSagaMiddleware()
   const store = createStore(rootReducer, bindMiddleware([sagaMiddleware]))
-
   store.sagaTask = sagaMiddleware.run(rootSaga)
   return store
 }
