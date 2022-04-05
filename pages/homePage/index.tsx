@@ -5,6 +5,7 @@ import styled from 'styled-components'
 import useRSAEncrypt from '../../lib/hooks/useRSAEncrypt'
 import api from '../../lib/apiClient'
 import bg from '../../assets/img/homepage-bg.jpg'
+import useAsync from '../../lib/hooks/useAsync'
 
 const Wrapper = styled.div`
   width: 100vw;
@@ -36,7 +37,6 @@ const HomePage: NextPage = () => {
 
   const [region, setRegion] = useState<string>(INIT_REGION)
   const [accountName, setAccountName] = useState<string>('')
-  const [isLoading, setIsLoading] = useState<boolean>(false)
   const { rsaEncryptData } = useRSAEncrypt()
 
   const inputChangeHandler = (e: React.SyntheticEvent) => {
@@ -44,9 +44,12 @@ const HomePage: NextPage = () => {
     setAccountName(value)
   }
 
-  const submitHandler = async () => {
-    if (accountName) {
-      setIsLoading(true)
+  const {
+    run: submitHandler,
+    loading: isLoading // if you want
+    //error  // if you want
+  } = useAsync(
+    async () => {
       try {
         const res = await api.post('/signin', {
           region,
@@ -61,15 +64,14 @@ const HomePage: NextPage = () => {
         } else {
           message.warning({ content: Msg })
         }
-        setIsLoading(false)
       } catch (error) {
         //do some logic
-        setIsLoading(false)
       }
-    } else {
-      message.warning({ content: '请输入账号' })
+    },
+    (error) => {
+      // do error handle
     }
-  }
+  )
 
   return (
     <Wrapper>
