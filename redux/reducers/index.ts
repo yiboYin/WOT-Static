@@ -2,10 +2,11 @@ import _ from 'lodash'
 import { combineReducers } from 'redux'
 import { HYDRATE } from 'next-redux-wrapper'
 import appReducer from './app'
-
+import playerReducer from './player'
 
 const combinedReducer = combineReducers({
   app: appReducer,
+  player: playerReducer
 })
 
 export type RootState = ReturnType<typeof combinedReducer>

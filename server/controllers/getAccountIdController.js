@@ -2,7 +2,7 @@ const _ = require('lodash')
 const { USER_INFO, ACCOUNT_ID } = require('../../constants/session')
 const { getAccountId } = require('../services/requestToWotStatistics')
 
-exports.getAccountIdController = () => async (req, res) => {
+exports.getAccountIdController = async (req, res) => {
   try {
     let Code = 'failed'
     let Msg = 'Fail to request to wot-statistics'
