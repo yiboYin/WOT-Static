@@ -5,6 +5,7 @@ import styled from 'styled-components'
 import useRSAEncrypt from '../../lib/hooks/useRSAEncrypt'
 import api from '../../lib/apiClient'
 import bg from '../../assets/img/homepage-bg.jpg'
+import useAsync from '../../lib/hooks/useAsync'
 
 const Wrapper = styled.div`
   width: 100vw;
@@ -43,16 +44,25 @@ const HomePage: NextPage = () => {
     setAccountName(value)
   }
 
-  const submitHandler = async () => {
-    try {
-      await api.post('/signin', {
-        region,
-        accountName: rsaEncryptData(accountName)
-      })
-    } catch (error) {
-      //do some logic
+  const {
+    run: submitHandler
+    //loading, // if you want
+    //error  // if you want
+  } = useAsync(
+    async () => {
+      try {
+        await api.post('/signin', {
+          region,
+          accountName: rsaEncryptData(accountName)
+        })
+      } catch (error) {
+        //do some logic
+      }
+    },
+    (error) => {
+      // do error handle
     }
-  }
+  )
 
   return (
     <Wrapper>
