@@ -12,3 +12,11 @@ declare module 'Shared/crypto' {
   export const encryptRSA: rsaEncryptFunc
   export const convertPemPublicKey: importKeyFunc
 }
+
+declare module 'Shared/logger' {
+  type logFun = (...msg: any[]) => void
+  export const log: logFun
+  export const info: logFun
+  export const warn: logFun
+  export const error: logFun
+}
