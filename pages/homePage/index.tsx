@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import type { NextPage } from 'next'
-import { Button, Select, Input, message } from 'antd'
+import { Button, Select, Input } from 'antd'
 import styled from 'styled-components'
 import useRSAEncrypt from '../../lib/hooks/useRSAEncrypt'
 import api from '../../lib/apiClient'
@@ -55,14 +55,17 @@ const HomePage: NextPage = () => {
           region,
           accountName: rsaEncryptData(accountName)
         })
-        const {
-          data: { Code, Msg }
-        } = res
-        if (Code === 'success') {
-          message.success({ content: Msg })
+        // const {
+        //   data: { Code, Msg }
+        // } = res
+        // if (Code === 'success') {
+        //   message.success({ content: Msg })
+        //   window.location.href = window.location.href.replace('/homePage', '/player')
+        // } else {
+        //   message.warning({ content: Msg })
+        // }
+        if (res?.data[0]?.account_id) {
           window.location.href = window.location.href.replace('/homePage', '/player')
-        } else {
-          message.warning({ content: Msg })
         }
       } catch (error) {
         //do some logic
