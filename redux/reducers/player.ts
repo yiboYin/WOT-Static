@@ -8,6 +8,11 @@ const reducer = (state = {}, action: AnyAction) => {
         ...state,
         ...{ summary: action.data }
       }
+    case actionTypes.GET_PROFILE_STATIC[SUCCESS]:
+      return {
+        ...state,
+        ...{ profileStatic: action.data }
+      }
     default:
       return state
   }

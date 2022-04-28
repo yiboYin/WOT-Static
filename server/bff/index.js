@@ -1,6 +1,5 @@
 const express = require('express')
 const { decryptRSAFields } = require('../middlewares/asymmetricDecryptFields')
-const { getAccountIdController } = require('../controllers/getAccountIdController')
 
 const router = express.Router()
 const publicRouter = express.Router()

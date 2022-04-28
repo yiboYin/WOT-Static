@@ -24,8 +24,11 @@ const getSummary = async (req, payload) => {
 }
 
 const getProfileStatic = async (req, payload) => {
-  // const { body } = await onboardServClient.customer.activateEmail(req, { payload })
-  // return body
+  const userInfo = _.get(req.session, USER_INFO)
+  const { region, accountId } = userInfo
+  const reqUrl = `${WARGAME_BASE_URL}.${region}${WOT_STATISITCS_API['getProfileStatic']}?spa_id=${accountId}&battle_type=random`
+  const { data } = await warGameClient.get(reqUrl, {})
+  return data
 }
 
 const getClanBattle = async (req, payload) => {
@@ -34,8 +37,21 @@ const getClanBattle = async (req, payload) => {
 }
 
 const getVehicleStatic = async (req, payload) => {
-  // const { body } = await onboardServClient.customer.activateEmail(req, { payload })
-  // return body
+  const { battle_type = 'random', nation = [], role = [], tie = [], type = [] } = req.body
+  const userInfo = _.get(req.session, USER_INFO)
+  const { region, accountId } = userInfo
+  const reqUrl = `${WARGAME_API_BASE_URL}.${region}${WOT_STATISITCS_API['getVehicleStatic']}`
+  const param = {
+    collector_vehicle: [0, 1],
+    spa_id: accountId,
+    battle_type,
+    nation,
+    role,
+    tie,
+    type
+  }
+  const { data } = await warGameClient.post(reqUrl, param)
+  return data
 }
 
 module.exports = {
