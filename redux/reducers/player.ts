@@ -13,6 +13,11 @@ const reducer = (state = {}, action: AnyAction) => {
         ...state,
         ...{ profileStatic: action.data }
       }
+    case actionTypes.GET_VEHICLE_STATIC[SUCCESS]:
+      return {
+        ...state,
+        ...{ vehicleStatic: action.data }
+      }
     default:
       return state
   }
